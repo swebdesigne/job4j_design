@@ -44,7 +44,8 @@ public class MatrixIt implements Iterator<Integer> {
         }
         for (int i = row; i < data.length; i++) {
             if (data[i].length != 0) {
-                return data[i][column++];
+                row = i;
+                break;
             }
         }
         return data[row][column++];
