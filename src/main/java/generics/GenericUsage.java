@@ -6,7 +6,7 @@ public class GenericUsage {
 
 
     public void printRsl(Collection<?> col) {
-        for(Iterator<?> it = col.iterator(); it.hasNext();) {
+        for (Iterator<?> it = col.iterator(); it.hasNext();) {
             Object next = it.next();
             System.out.println("Current element is " + next);
         }
