@@ -29,8 +29,7 @@ public class SimpleArray<T> implements Iterator {
     }
 
     /**
-     * Добавляет указанный элемент в первую
-     * свободную ячейку
+     * Добавляет указанный элемент в первую свободную ячейку
      * @param num
      */
     public void add(T num) {
@@ -39,8 +38,8 @@ public class SimpleArray<T> implements Iterator {
     }
 
     /**
-     * заменяет указанным элементом (model) элемент, находящийся по индексу index;
-     * @param index - индекс элемента, котрый необходимо заменить
+     * заменяет указанным элементом (model) элемент, находящийся по индексу
+     * @param index - индекс элемента, который необходимо заменить
      * @param model
      */
     public void set(int index, T model) {
@@ -49,8 +48,8 @@ public class SimpleArray<T> implements Iterator {
     }
 
     /**
-     * удаляет элемент по указанному индекс
-     * @param index- индекс элемента, котрый необходимо удалить
+     * удаляет элемент по указанному индексу
+     * @param index- индекс элемента, который необходимо удалить
      */
     public void remove(int index) {
         Objects.checkIndex(index, size);
@@ -59,7 +58,7 @@ public class SimpleArray<T> implements Iterator {
     }
 
     /**
-     * проверяет, если ли следующий элемент
+     * проверяет, имеется ли следующий элемент
      * @return
      */
     @Override
