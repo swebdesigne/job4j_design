@@ -17,8 +17,8 @@ public class Array {
         arr.set(0, 20);
         arr.remove(4);
         System.out.println();
-        while (arr.hasNext()) {
-            System.out.println(arr.next());
+        while (arr.iterator().hasNext()) {
+            System.out.println(arr.iterator().next());
         }
         System.out.println();
         System.out.println(arr.get(5));

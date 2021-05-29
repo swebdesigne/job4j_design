@@ -1,5 +1,6 @@
 package generics;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -10,10 +11,10 @@ import java.util.Objects;
  * @param <T>
  */
 
-public class SimpleArray<T> implements Iterator {
+public class SimpleArray<T> implements Iterable<T> {
     private Object[] array;
     private int size = 0;
-    int index = 0;
+    private int index = 0;
 
     public SimpleArray(int size) {
         this.array = new Object[size];
@@ -25,6 +26,7 @@ public class SimpleArray<T> implements Iterator {
      * @return
      */
     public Object get(int index) {
+        Objects.checkIndex(index, size);
         return array[index];
     }
 
@@ -57,21 +59,21 @@ public class SimpleArray<T> implements Iterator {
         size--;
     }
 
-    /**
-     * проверяет, имеется ли следующий элемент
-     * @return
-     */
     @Override
-    public boolean hasNext() {
-        return index < size;
-    }
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
 
-    /**
-     * итерирует элемент
-     * @return - возвращает элемент по индексу
-     */
-    @Override
-    public Object next() {
-        return array[index++];
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            public T next() {
+                return (T) array[index++];
+            }
+
+            public void remove() {
+                throw new UnsupportedOperationException("Cannot remove an element of an array.");
+            }
+        };
     }
 }
