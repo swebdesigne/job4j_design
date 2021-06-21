@@ -1,6 +1,5 @@
 package collection;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
@@ -44,7 +43,7 @@ public class SimpleArrayTest {
     @Test(expected = NoSuchElementException.class)
     public void whenGetEmptyFromIt() {
         SimpleArray<String> array = new SimpleArray<>();
-        System.out.println(array.iterator().next());
+        array.iterator().next();
     }
 
     @Test(expected = ConcurrentModificationException.class)
@@ -54,6 +53,38 @@ public class SimpleArrayTest {
         Iterator<String> it = array.iterator();
         array.add("second");
         it.next();
+    }
+
+    @Test
+    public void whenAddFurtherElement() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        array.add("second");
+        array.add("third");
+        String first = array.get(0);
+        String second = array.get(1);
+        String third = array.get(2);
+        Iterator<String> it = array.iterator();
+        assertThat(first, is("first"));
+        assertThat(second, is("second"));
+        assertThat(third, is("third"));
+    }
+
+    @Test
+    public void whenIncreaseCapacity() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        array.add("second");
+        array.add("third");
+        array.add("forth");
+        array.add("fifth");
+        array.add("sixth");
+        array.add("seventh");
+        array.add("eighth");
+        array.add("ninth");
+        array.add("tenth");
+        array.add("eleventh");
+        assertThat(array.getCapacity(), is(20));
     }
 
 }
