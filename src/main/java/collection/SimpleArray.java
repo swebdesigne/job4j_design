@@ -6,7 +6,7 @@ public class SimpleArray<T> implements Iterable<T> {
     private Object[] container;
     private int size;
     private int modCount = 0;
-    private int index = 0;
+
 
     public SimpleArray() {
         this.container = new Object[10];
@@ -39,6 +39,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         int expectedModCount = modCount;
         return new Iterator<T>() {
+            int index = 0;
             @Override
             public boolean hasNext() {
                 return index < size;
