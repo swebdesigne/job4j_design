@@ -39,7 +39,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         int expectedModCount = modCount;
         return new Iterator<T>() {
-            int index = 0;
+            private int index = 0;
             @Override
             public boolean hasNext() {
                 return index < size;
