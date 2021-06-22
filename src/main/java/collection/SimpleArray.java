@@ -2,7 +2,7 @@ package collection;
 
 import java.util.*;
 
-public class SimpleArray<T> implements Iterable {
+public class SimpleArray<T> implements Iterable<T> {
     private Object[] container;
     private int size;
     private int modCount = 0;
@@ -32,11 +32,7 @@ public class SimpleArray<T> implements Iterable {
     }
 
     private void capacity() {
-        Object[] temp = new Object[(int) (container.length * 2)];
-        for (int i = 0; i < container.length; i++) {
-            temp[i] = container[i];
-        }
-        container = Arrays.copyOf(temp, temp.length);
+       Arrays.copyOf(container, container.length * 2);
     }
 
     @Override
@@ -56,9 +52,6 @@ public class SimpleArray<T> implements Iterable {
                     throw new ConcurrentModificationException();
                 }
                 return (T) container[index++];
-            }
-            public void remove() {
-                throw new UnsupportedOperationException("Cannot remove an element of an array.");
             }
         };
     }
