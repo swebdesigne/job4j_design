@@ -1,37 +1,45 @@
 package collection;
 
 public class Node<E> {
-    private E currentElement;
-    private Node<E> nextElement;
-    private Node<E> prevElement;
+    private E data;
+    private Node<E> next;
+    private Node<E> prev;
 
-    Node(E currentElement, Node<E> nextElement, Node<E> prevElement) {
-        this.currentElement = currentElement;
-        this.nextElement = nextElement;
-        this.prevElement = prevElement;
+    Node(E data) {
+        this(null, data, null);
+    }
+
+    Node(Node<E> prevElement, E data, Node<E> nextElement) {
+        this.data = data;
+        this.next = nextElement;
+        this.prev = prevElement;
     }
 
     public E getCurrentElement() {
-        return currentElement;
+        return data;
+    }
+
+    public E getData() {
+        return data;
     }
 
     public void setCurrentElement(E currentElement) {
-        this.currentElement = currentElement;
+        this.data = currentElement;
     }
 
     public Node<E> getNextElement() {
-        return nextElement;
+        return next;
     }
 
     public void setNextElement(Node<E> nextElement) {
-        this.nextElement = nextElement;
+        this.next = nextElement;
     }
 
     public Node<E> getPrevElement() {
-        return prevElement;
+        return prev;
     }
 
     public void setPrevElement(Node<E> prevElement) {
-        this.prevElement = prevElement;
+        this.prev = prevElement;
     }
 }

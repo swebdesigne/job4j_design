@@ -1,53 +1,68 @@
 package collection;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class SimpleLinkedList<E> implements List<E> {
-    private Node<E> fstNode;
-    private Node<E> lstNode;
+    private Node<E> data;
     private int size = 0;
+    private int modCount = 0;
 
     public SimpleLinkedList() {
-        lstNode = new Node<>(null, fstNode, null);
-        fstNode = new Node<>(null, null, lstNode);
+        data = null;
     }
 
     @Override
-    public void add(E e) {
-        Node<E> prev = lstNode;
-        prev.setCurrentElement(e);
-        lstNode = new Node<E>(null, prev, null);
-        prev.setNextElement(lstNode);
+    public void add(E value) {
+        if (isEmpty()) {
+            data = new Node<E>(value);
+        } else {
+            Node<E> tmp = data;
+            while (tmp.getNextElement() != null) {
+                tmp = tmp.getNextElement();
+            }
+            tmp.setNextElement(new Node<E>(tmp, value, null));
+        }
         size++;
-        System.out.println(lstNode.getPrevElement());
+        modCount++;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     @Override
     public E get(int index) {
-        Node<E> target = fstNode.getNextElement();
-//        System.out.println(target.getCurrentElement());
-        for (int i = 0; i < index; i++) {
-            target = getNextElement(target);
+        Objects.checkIndex(index, size);
+        Node<E> x = data;
+        int it = 0;
+        while (it < index) {
+            x = x.getNextElement();
+            it++;
         }
-        return target.getCurrentElement();
+        return x.getCurrentElement();
     }
 
-    private Node<E> getNextElement(Node<E> current) {
-        return current.getNextElement();
-    }
     @Override
     public Iterator<E> iterator() {
+        int expectedModCount = modCount;
         return new Iterator<E>() {
-            int index = 0;
+            private int index = 0;
 
             @Override
             public boolean hasNext() {
-                return index < size;
+                return  index < size;
             }
-
             @Override
             public E next() {
-                return get(index++);
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+                Node<E> x = (index == 0) ? data : data.getNextElement();
+                index++;
+                return x.getCurrentElement();
             }
         };
     }
