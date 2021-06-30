@@ -34,10 +34,8 @@ public class SimpleLinkedList<E> implements List<E> {
     public E get(int index) {
         Objects.checkIndex(index, size);
         Node<E> x = data;
-        int it = 0;
-        while (it < index) {
+        for (int i = 0; i < index; i++) {
             x = x.getNextElement();
-            it++;
         }
         return x.getCurrentElement();
     }
