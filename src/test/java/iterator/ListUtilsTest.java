@@ -60,6 +60,6 @@ public class ListUtilsTest {
         List<Integer> first = new ArrayList<>(Arrays.asList(0, 1, 2, 5));
         List<Integer> second = new ArrayList<>(Arrays.asList(0, 1, 2));
         ListUtils.removeAll(first, second);
-        assertThat(Arrays.asList(0, 1, 2), Is.is(first));
+        assertThat(Arrays.asList(5), Is.is(first));
     }
 }
