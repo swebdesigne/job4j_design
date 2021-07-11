@@ -44,7 +44,7 @@ public class ListUtilsTest {
         List<Integer> first = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
         Predicate<Integer> x = integer -> integer < 3;
         ListUtils.removeIf(first, x);
-        assertThat(Arrays.asList(0, 1, 2), Is.is(first));
+        assertThat(Arrays.asList(3), Is.is(first));
     }
 
     @Test

@@ -19,25 +19,21 @@ public class ListUtils {
 
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> i = list.listIterator();
-        boolean flag = false;
-        while (i.hasNext()) {
-            if (i.previousIndex() == index) {
-                flag = true;
-                i.add(value);
+        ListIterator<T> it = list.listIterator();
+        while (it.hasNext()) {
+            if (it.nextIndex() == index) {
+                it.next();
+                it.add(value);
                 break;
             }
-            i.next();
-        }
-        if (!flag) {
-            list.add(value);
+            it.next();
         }
     }
 
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
         ListIterator<T> i = list.listIterator();
         while (i.hasNext()) {
-            if (!filter.test(i.next())) {
+            if (filter.test(i.next())) {
                 i.remove();
             }
         }
@@ -54,20 +50,13 @@ public class ListUtils {
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
         ListIterator<T> first = list.listIterator();
-        ListIterator<T> second = elements.listIterator();
-        boolean flag = false;
         while (first.hasNext()) {
-            while (second.hasNext()) {
-                if (list.get(first.nextIndex()) == elements.get(second.nextIndex())) {
-                    flag = true;
-                    break;
-                }
-                second.next();
+            if (!elements.contains(list.get(first.nextIndex()))) {
+                first.next();
+                first.remove();
+                break;
             }
             first.next();
-            if (!flag || !second.hasNext()) {
-                first.remove();
-            }
         }
     }
 }
