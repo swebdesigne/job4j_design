@@ -20,6 +20,10 @@ public class SimpleArray<T> implements Iterable<T> {
         this.array = new Object[size];
     }
 
+    public SimpleArray() {
+
+    }
+
     /**
      * возвращает элемент, расположенный по указанному индексу
      * @param index - индекс элемента, котрый необходимо вернуть
@@ -57,6 +61,10 @@ public class SimpleArray<T> implements Iterable<T> {
         Objects.checkIndex(index, size);
         System.arraycopy(array, index + 1, array, index, size - index - 1);
         size--;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
