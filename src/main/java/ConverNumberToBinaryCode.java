@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class ConverNumberToBinaryCode {
     public static String binary(int num) {
         StringBuilder sb = new StringBuilder();
@@ -9,7 +11,14 @@ public class ConverNumberToBinaryCode {
         return sb.reverse().toString();
     }
 
+    static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+
+
     public static void main(String[] args) {
         System.out.println(binary(16));
+        System.out.println(hash(4));
     }
 }
