@@ -19,8 +19,8 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean contains(T value) {
-        for (int i = 0; i < set.getSize(); i++) {
-            if (Objects.equals(set.get(i), value)) {
+        while (iterator().hasNext()) {
+            if (Objects.equals(iterator().next(), value)) {
                 return true;
             }
         }
@@ -29,15 +29,5 @@ public class SimpleSet<T> implements Set<T> {
 
     public Iterator<T> iterator() {
         return set.iterator();
-    }
-
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
-    public T next() {
-        return null;
     }
 }
