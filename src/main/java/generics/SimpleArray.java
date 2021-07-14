@@ -14,7 +14,7 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] array;
     private int size = 0;
-    private int index = 0;
+
 
     public SimpleArray(int size) {
         this.array = new Object[size];
@@ -70,7 +70,7 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-
+            private int index = 0;
             public boolean hasNext() {
                 return index < size;
             }

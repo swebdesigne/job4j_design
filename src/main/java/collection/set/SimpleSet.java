@@ -3,6 +3,7 @@ package collection.set;
 import generics.SimpleArray;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleSet<T> implements Set<T> {
@@ -19,8 +20,9 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean contains(T value) {
-        while (iterator().hasNext()) {
-            if (Objects.equals(iterator().next(), value)) {
+        Iterator<T> iterator = iterator();
+        while (iterator.hasNext()) {
+            if (Objects.equals(iterator.next(), value)) {
                 return true;
             }
         }
