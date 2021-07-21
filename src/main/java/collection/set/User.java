@@ -16,10 +16,22 @@ public class User {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass() || obj == null ) {
+            return false;
+        }
+        User user = (User) obj;
+        return name.equals(user.name)
+                && children.equals(user.children)
+                && birthday.equals(user.birthday);
     }
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
+    }
     public static void main(String[] args) {
         User user1 = new User("Igor", "yes", new GregorianCalendar(2017, 11, 12));
         User user2 = new User("Igor", "yes", new GregorianCalendar(2017, 11, 12));
@@ -34,6 +46,7 @@ public class User {
             System.out.println("");
             System.out.println(u.hashCode());
         }
+        System.out.println(user1.equals(user2));
         System.out.println(hash(user1.hashCode()) == hash(user2.hashCode()));
     }
 }
