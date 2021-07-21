@@ -1,9 +1,8 @@
 package collection.set;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import static java.util.Objects.hash;
 
 public class User {
     private String name;
@@ -14,6 +13,11 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
     }
 
     public static void main(String[] args) {
@@ -28,6 +32,8 @@ public class User {
             System.out.println("children = " + u.children);
             System.out.println("birthday = " + u.birthday.getTime());
             System.out.println("");
+            System.out.println(u.hashCode());
         }
+        System.out.println(hash(user1.hashCode()) == hash(user2.hashCode()));
     }
 }
