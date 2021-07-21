@@ -20,7 +20,7 @@ public class User {
         if (obj == this) {
             return true;
         }
-        if (obj.getClass() != getClass() || obj == null ) {
+        if (obj.getClass() != getClass() || obj == null) {
             return false;
         }
         User user = (User) obj;
@@ -28,10 +28,12 @@ public class User {
                 && children.equals(user.children)
                 && birthday.equals(user.birthday);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, children, birthday);
     }
+
     public static void main(String[] args) {
         User user1 = new User("Igor", "yes", new GregorianCalendar(2017, 11, 12));
         User user2 = new User("Igor", "yes", new GregorianCalendar(2017, 11, 12));
