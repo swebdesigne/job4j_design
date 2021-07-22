@@ -1,5 +1,7 @@
 package collection.set;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.*;
 
 import static java.util.Objects.hash;
