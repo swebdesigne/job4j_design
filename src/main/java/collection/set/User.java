@@ -3,6 +3,7 @@ package collection.set;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.*;
+import java.util.Set;
 
 import static java.util.Objects.hash;
 
@@ -52,5 +53,22 @@ public class User {
         }
         System.out.println(user1.equals(user2));
         System.out.println(hash(user1.hashCode()) == hash(user2.hashCode()));
+        Set<Integer> set = new HashSet<>();
+        set.add(5);
+        set.add(3);
+        set.add(7);
+        set.add(10);
+        set.add(2);
+
+        Set<Integer> set2 = new HashSet<>();
+        set.add(5);
+        set.add(4);
+        set.add(1);
+        set.add(10);
+        set.add(2);
+
+        Set<Integer> set3 = new HashSet<>(set);
+        set3.retainAll(set2);
+        System.out.println(set2);
     }
 }
