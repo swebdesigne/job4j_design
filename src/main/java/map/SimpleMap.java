@@ -19,7 +19,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             expand();
         }
         int index = indexFor(hash(key));
-        if (checkIsIndex(index)) {
+        if (checkIsIndex(index, key)) {
             MapEntry<K, V> newElem = new MapEntry<>(key, value);
             count++;
             modCount++;
@@ -29,8 +29,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return false;
     }
 
-    private boolean checkIsIndex(int index) {
-        if (table[index] == null) {
+    private boolean checkIsIndex(int index, K key) {
+        if (table[index] == null || table[index].getKey().equals(key)) {
             return true;
         }
         return false;

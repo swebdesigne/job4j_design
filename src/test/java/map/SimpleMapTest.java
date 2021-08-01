@@ -18,18 +18,18 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void whenPutNotSuccess() {
+    public void whenAddSameElementFalse() {
         SimpleMap<String, String> simpleMap = new SimpleMap();
-        simpleMap.put("Igor", "Sivolobov");
-        assertFalse(simpleMap.put("Igor", "Sivolobov"));
+        simpleMap.put("Igor", "33");
+        assertFalse(simpleMap.put("Michail", "10"));
     }
 
     @Test
-    public void whenAddSameElement() {
+    public void whenAddSameElementTrue() {
         SimpleMap<String, String> simpleMap = new SimpleMap();
         simpleMap.put("Igor", "33");
-        simpleMap.put("Michail", "10");
-        assertFalse(simpleMap.put("Michail", "10"));
+        simpleMap.put("Igor", "10");
+        assertThat(simpleMap.get("Igor"), is("10"));
     }
 
     @Test
