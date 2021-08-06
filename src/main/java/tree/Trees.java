@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
@@ -10,23 +11,12 @@ class SimpleTree<E> implements Tree<E> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SimpleTree<?> that = (SimpleTree<?>) o;
-        return Objects.equals(root, that.root);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(root);
-    }
-
-    @Override
     public boolean add(E parent, E child) {
-        List<Node<E>> children = new ArrayList<>();
         if (findBy(parent).isPresent() && !findBy(child).isPresent()) {
-            findBy(parent).get().children.add((Integer) parent, new SimpleTree<E>(child).root);
+            findBy(parent)
+                    .stream()
+                    .map(x -> x.children.add(new Node<E>(child)))
+                    .collect(Collectors.toList());
             return true;
         }
         return false;

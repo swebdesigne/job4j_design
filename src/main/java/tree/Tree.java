@@ -9,9 +9,6 @@ public interface Tree<E> {
     Optional<Node<E>> findBy(E value);
 
      class Node<E> {
-         E leftChild;
-         E rightChild;
-
          final E value;
          final List<Node<E>> children = new ArrayList<>();
 
