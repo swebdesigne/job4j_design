@@ -53,6 +53,13 @@ public class SimpleMapTest {
     }
 
     @Test
+    public void whenGetSuccessFalse() {
+        SimpleMap<String, String> simpleMap = new SimpleMap();
+        simpleMap.put("Igor", "Sivolobov");
+        assertFalse(simpleMap.put("Michail", "33"));
+    }
+
+    @Test
     public void whenGetIsNull() {
         SimpleMap<String, String> simpleMap = new SimpleMap();
         simpleMap.put("Igor", "Sivolobov");
