@@ -2,7 +2,6 @@ package tree;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
