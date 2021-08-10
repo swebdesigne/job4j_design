@@ -21,14 +21,12 @@ class SimpleTree<E> implements Tree<E> {
 
     @Override
     public boolean isBinary() {
-        Predicate<Node<E>> predicate = (root -> root.children.size() > 2);
-        return findByPredicate(predicate).isEmpty();
+        return findByPredicate(root -> root.children.size() > 2).isEmpty();
     }
 
     @Override
     public Optional<Node<E>> findBy(E value) {
-        Predicate<Node<E>> predicate = (root -> root.value.equals(value));
-        return findByPredicate(predicate);
+        return findByPredicate(root -> root.value.equals(value));
     }
 
     private Optional<Node<E>> findByPredicate(Predicate<Node<E>> condition) {
@@ -44,5 +42,15 @@ class SimpleTree<E> implements Tree<E> {
             data.addAll(el.children);
         }
         return rsl;
+    }
+
+    public static void main(String[] args) {
+        SortedSet<String> str = new TreeSet<>();
+        str.add("c");
+        str.add("b");
+        str.add("a");
+        for (String list : str) {
+            System.out.println(list);
+        }
     }
 }
