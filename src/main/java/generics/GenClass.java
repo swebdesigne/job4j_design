@@ -1,5 +1,9 @@
 package generics;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 public class GenClass<T> {
     private T value;
 
@@ -12,7 +16,7 @@ public class GenClass<T> {
     }
 }
 
-class Stats<T extends Number>  {
+class Stats<T extends Number> {
     T[] nums;
 
     public Stats(T[] nums) {
@@ -73,7 +77,7 @@ class Coords<T extends TowD> {
         for (int i = 0; i < c.coords.length; i++) {
             System.out.println(
                     c.coords[i].x
-                    + " " + c.coords[i].y
+                        + " " + c.coords[i].y
                             + " " + c.coords[i].z
             );
         }
@@ -97,11 +101,6 @@ class GenSubClass {
         System.out.println(stats2.average());
 
         System.out.println(stats.sameAvg(stats2));
-
-        // don`t will be working, because we make extending to up side and no extends class String
-//        Stats<String> stats3 = new Stats<String>(new Double[] {12d, 2d, 2d});
-//        System.out.println(stats3.average());
-
 
         GenClass<String> genClass1 = new GenClass<String>("My name is Igor. Age: ");
         GenClass<Integer> genClass2 = new GenClass<Integer>(25);
