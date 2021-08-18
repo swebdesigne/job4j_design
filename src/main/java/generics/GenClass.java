@@ -1,10 +1,8 @@
 package generics;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
+import java.util.*;
 
-public class GenClass<T> {
+public class GenClass<T> implements Comparator{
     private T value;
 
     public GenClass(T value) {
@@ -13,6 +11,11 @@ public class GenClass<T> {
 
     public T getValue() {
         return value;
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return 0;
     }
 }
 
@@ -105,6 +108,17 @@ class GenSubClass {
         GenClass<String> genClass1 = new GenClass<String>("My name is Igor. Age: ");
         GenClass<Integer> genClass2 = new GenClass<Integer>(25);
         System.out.println(genClass1.getValue() + " " + genClass2.getValue());
+
+        System.out.println("This is LinkedList");
+        List<Integer> integerList = new LinkedList<>();
+        integerList.add(1);
+        integerList.add(2);
+        integerList.add(3);
+        integerList.add(14);
+        integerList.add(15);
+        integerList.stream()
+                .forEach(System.out::println);
+
     }
 }
 
