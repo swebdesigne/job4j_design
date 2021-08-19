@@ -36,8 +36,16 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id &&
-                Objects.equals(name, user.name);
+        return id == user.id
+                && Objects.equals(name, user.name);
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 
     @Override

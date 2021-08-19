@@ -1,29 +1,20 @@
 package question;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Analize {
     public static Info diff(Set<User> previous, Set<User> current) {
         Info info =  new Info(0, 0, 0);
-
-//        if (!previous.containsAll(current) && current.size() > previous.size()) {
-//            info.setAdded(info.getAdded() + 1);
-//        }
-//
-//        if (!current.contains(previous) && current.size() < previous.size()) {
-//            info.setDeleted(info.getDeleted() + 1);
-//        }
-
-        for (User name : current) {
-            for (User name2 : previous) {
-                if (name.getId() == name2.getId()
-                        && !name.getName().equals(name2.getName())) {
-                    info.setChanged(info.getChanged() + 1);
-                }
+        Map<Integer, String> users = current.stream().collect(Collectors.toMap(User::getId, User::getName));
+        for (User value : previous) {
+            if (!users.containsKey(value.getId())) {
+                info.setDeleted(info.getDeleted() + 1);
+            } else if (!users.containsValue(value.getName())) {
+                info.setChanged(info.getChanged() + 1);
             }
         }
+        info.setAdded(current.size() - (previous.size() - info.getDeleted()));
         return info;
     }
 }
