@@ -2,7 +2,7 @@ package generics;
 
 import java.util.*;
 
-public class GenClass<T> implements Comparator{
+public class GenClass<T> implements Comparator {
     private T value;
 
     public GenClass(T value) {

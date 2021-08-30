@@ -39,8 +39,12 @@ class Student implements Comparable<Student> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Student student = (Student) o;
         return course == student.course && Objects.equals(name, student.name);
     }

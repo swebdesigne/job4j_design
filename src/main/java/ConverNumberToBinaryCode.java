@@ -12,10 +12,9 @@ public class ConverNumberToBinaryCode {
     }
 
     static final int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        int h = key.hashCode();
+        return (key == null) ? 0 : (h) ^ (h >>> 16);
     }
-
 
     public static void main(String[] args) {
         System.out.println(binary(16));

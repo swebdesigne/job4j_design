@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Test1 {
     public static void main(String[] args) {
-        List <Employee> list = new ArrayList<>();
+        List<Employee> list = new ArrayList<>();
         list.add(new Employee(4, "Igor", "Sivolobov", 22));
         list.add(new Employee(2, "Alina", "Sivolobova", 32));
         list.add(new Employee(3, "Boris", "Sivolobov", 50));
@@ -33,12 +33,12 @@ class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", salary=" + salary +
-                '}';
+        return "Employee{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", surname='" + surname + '\''
+                + ", salary=" + salary
+                + '}';
     }
 
 }
