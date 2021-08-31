@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public class BufferedReader {
     public static List<String> filter(String file) {
-        try (java.io.BufferedReader in = new java.io.BufferedReader(new FileReader(file))) {
+        try (FileReader reader = new FileReader(file);
+             java.io.BufferedReader in = new java.io.BufferedReader(reader)) {
             return in.lines()
                     .filter(x -> Integer.valueOf(x.split(" ")[8]) == 404)
                     .collect(Collectors.toList());
