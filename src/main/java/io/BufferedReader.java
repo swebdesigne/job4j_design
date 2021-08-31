@@ -9,7 +9,7 @@ public class BufferedReader {
         try (FileReader reader = new FileReader(file);
              java.io.BufferedReader in = new java.io.BufferedReader(reader)) {
             return in.lines()
-                    .filter(x -> Integer.valueOf(x.split(" ")[8]) == 404)
+                    .filter(x -> Integer.parseInt(x.split(" ")[8]) == 404)
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
