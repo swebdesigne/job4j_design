@@ -11,11 +11,10 @@ import java.util.stream.Collectors;
 
 public class LogFilter {
     public static List<String> filter(String file) {
-        try (BufferedReader r = new BufferedReader(new FileReader("log.txt"))) {
+        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
            return r.lines()
                    .filter(x -> Integer.valueOf(x.split(" ")[8]) == 404)
                    .collect(Collectors.toList());
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
