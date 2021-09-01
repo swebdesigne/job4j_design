@@ -9,7 +9,7 @@ import static org.hamcrest.core.Is.*;
 public class ConfigTest {
     @Test
     public void whenPairWithoutComment() {
-        String path = "./data/pair_without_comment.properties";
+        String path = "src/main/java/data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name"), is("Igor Sivolobov"));
@@ -18,7 +18,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairHasCommentsAndEmptyStrings() {
-        String path = "./data/pair_has_comments_and_empty_strings.properties";
+        String path = "src/main/java/data/pair_has_comments_and_empty_strings.properties";
         Config config = new Config(path);
         config.load();
         assertTrue(config.isEmpty());
@@ -26,7 +26,7 @@ public class ConfigTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void whenPairHasDisturbanceBetweenKeyAndValue() {
-        String path = "./data/app.properties";
+        String path = "src/main/java/data/app.properties";
         Config config = new Config(path);
         config.load();
     }

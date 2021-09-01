@@ -60,7 +60,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        new Config("./data/app.properties").load();
-        System.out.println(new Config("./data/app.properties"));
+        System.out.println(new Config("src/main/java/data/app.properties"));
     }
 }
