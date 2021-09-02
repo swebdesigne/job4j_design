@@ -3,6 +3,7 @@ package io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -41,6 +42,9 @@ public class Config {
     }
 
     public String value(String key) {
+        if (!values.containsKey(key)) {
+            throw new UnsupportedOperationException("The key is missing");
+        }
         return values.get(key);
     }
 
@@ -60,6 +64,8 @@ public class Config {
     }
 
     public static void main(String[] args) {
+        URL url = Config.class.getResource("./data/app.properties");
+        System.out.println(url);
         System.out.println(new Config("src/main/java/data/app.properties"));
     }
 }
