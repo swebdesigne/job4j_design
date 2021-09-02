@@ -64,8 +64,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        URL url = Config.class.getResource("./data/app.properties");
-        System.out.println(url);
         System.out.println(new Config("src/main/java/data/app.properties"));
     }
 }
