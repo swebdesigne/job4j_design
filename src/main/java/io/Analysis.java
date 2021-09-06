@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Analysis {
-    private Set<Integer> statusList = Set.of(400, 500);
+    private Set<String> statusList = Set.of("400", "500");
 
     public void unavailable(String source, String target) {
         boolean flag = true;
@@ -17,7 +17,7 @@ public class Analysis {
             Iterator<String> iterator = in.lines().iterator();
             while (iterator.hasNext()) {
                 String[] explode = iterator.next().split(" ");
-                int status = Integer.parseInt(explode[0]);
+                String status = explode[0];
                 String answ = explode[1];
                 if (statusList.contains(status) && flag) {
                     out.print(answ);
