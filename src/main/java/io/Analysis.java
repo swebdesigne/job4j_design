@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Analysis {
     public void unavailable(String source, String target) {
-        boolean flag = false;
+        boolean flag = true;
         Set<Integer> errStatus = Set.of(400, 500);
         try (FileReader read = new FileReader(source);
             BufferedReader in = new BufferedReader(read);
@@ -17,13 +17,13 @@ public class Analysis {
             while (iterator.hasNext()) {
                 String msg = iterator.next();
                 int status = Integer.parseInt(msg.split(" ")[0]);
-                if (errStatus.contains(status) && !flag) {
+                if (errStatus.contains(status) && flag) {
                     out.print(msg.substring(4));
-                    flag = true;
-                }
-                if (!errStatus.contains(status) && flag) {
-                    out.println(";" + msg.substring(4));
                     flag = false;
+                }
+                if (!errStatus.contains(status) && !flag) {
+                    out.println(";" + msg.substring(4));
+                    flag = true;
                 }
             }
         } catch (IOException e) {
