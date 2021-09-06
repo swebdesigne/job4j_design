@@ -6,23 +6,25 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Analysis {
+    private Set<Integer> statusList = Set.of(400, 500);
+
     public void unavailable(String source, String target) {
         boolean flag = true;
-        Set<Integer> errStatus = Set.of(400, 500);
         try (FileReader read = new FileReader(source);
             BufferedReader in = new BufferedReader(read);
             PrintWriter out = new PrintWriter(new FileOutputStream(target))
         ) {
             Iterator<String> iterator = in.lines().iterator();
             while (iterator.hasNext()) {
-                String msg = iterator.next();
-                int status = Integer.parseInt(msg.split(" ")[0]);
-                if (errStatus.contains(status) && flag) {
-                    out.print(msg.substring(4));
+                String[] explode = iterator.next().split(" ");
+                int status = Integer.parseInt(explode[0]);
+                String answ = explode[1];
+                if (statusList.contains(status) && flag) {
+                    out.print(answ);
                     flag = false;
                 }
-                if (!errStatus.contains(status) && !flag) {
-                    out.println(";" + msg.substring(4));
+                if (!statusList.contains(status) && !flag) {
+                    out.println(";" + answ);
                     flag = true;
                 }
             }
