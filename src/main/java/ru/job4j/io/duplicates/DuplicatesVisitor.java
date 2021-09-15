@@ -12,10 +12,8 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (!attrs.isDirectory()) {
-            if (!set.add(new FileProperty(attrs.size(), String.valueOf(file.getFileName())))) {
+       if (!set.add(new FileProperty(attrs.size(), String.valueOf(file.getFileName())))) {
                 System.out.println(String.format("fileName = %s size = %s", file.getFileName(), attrs.size()));
-            }
         }
         return super.visitFile(file, attrs);
     }
