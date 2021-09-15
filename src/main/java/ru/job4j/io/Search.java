@@ -12,8 +12,8 @@ public class Search {
         if (args.length == 0) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
-        if (args.length < 2 || !args[1].equals("js")) {
-            throw new IllegalArgumentException("Need to add the extension and extension have to be JS !!!");
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Need to add the extension");
         }
         Path start = Paths.get(args[0]);
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
