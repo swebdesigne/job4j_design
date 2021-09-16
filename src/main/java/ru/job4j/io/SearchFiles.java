@@ -11,13 +11,13 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class SearchFiles implements FileVisitor<Path> {
     private Predicate<Path> condition;
-    private static List<Path> paths = new ArrayList<>();
+    private List<Path> paths = new ArrayList<>();
 
     public SearchFiles(Predicate<Path> cond) {
         condition = cond;
     }
 
-    public static List<Path> getPaths() throws IOException {
+    public List<Path> getPaths() throws IOException {
         return paths;
     }
 
