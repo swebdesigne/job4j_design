@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
@@ -15,12 +16,16 @@ public class ArgsName {
             throw new IllegalArgumentException();
         }
         for (String value : args) {
-            String[] tmp = value.split("=");
-            if (tmp.length < 2) {
-                throw new IllegalArgumentException();
+            if (!displayError("[a-zA-Z0-9]=[a-zA-Z0-9]", value)) {
+                throw new IllegalArgumentException("The string cannot contains no one of the symbol before and after the sign equals");
             }
+            String[] tmp = value.split("=");
             values.put(tmp[0].substring(1), tmp[1]);
         }
+    }
+
+    private boolean displayError(String pattern, String string) {
+        return Pattern.compile(pattern).matcher(string).find();
     }
 
     public static ArgsName of(String[] args) {

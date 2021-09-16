@@ -28,4 +28,14 @@ public class ArgsNameTest {
     public void whenWrongSomeArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenDontExistsSecondArgument() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "=parametr"});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPointInsteadArgument() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "="});
+    }
 }
