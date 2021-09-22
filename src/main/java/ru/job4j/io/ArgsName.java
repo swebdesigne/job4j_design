@@ -11,12 +11,24 @@ public class ArgsName {
         return values.get(key);
     }
 
+    public String getPath() {
+        return values.get("d");
+    }
+
+    public String exclude() {
+        return values.get("e").split("\\.")[1];
+    }
+
+    public String toDirection() {
+        return values.get("0");
+    }
+
     private void parse(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException();
         }
         for (String value : args) {
-            if (!displayError("[a-zA-Z0-9]=[a-zA-Z0-9]", value)) {
+            if (!displayError("[a-zA-Z0-9*.]=[a-zA-Z0-9*.]", value)) {
                 throw new IllegalArgumentException("The string cannot contains no one of the symbol before and after the sign equals");
             }
             String[] tmp = value.split("=");
