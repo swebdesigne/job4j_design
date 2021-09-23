@@ -15,12 +15,16 @@ public class ArgsName {
         return values.get("d");
     }
 
+    public int size() {
+        return values.size();
+    }
+
     public String exclude() {
-        return values.get("e").split("\\.")[1];
+        return values.get("e");
     }
 
     public String toDirection() {
-        return values.get("0");
+        return values.get("o");
     }
 
     private void parse(String[] args) {

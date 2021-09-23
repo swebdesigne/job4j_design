@@ -4,7 +4,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -35,18 +37,20 @@ public class Zip {
         }
     }
 
-    private void validation(String[] args, String path) {
-        if (args.length != 3 || (Files.notExists(Path.of(path)) || !Files.isDirectory(Path.of(path)))) {
+    private void validation(ArgsName check) {
+        if (check.size() != 3 || (Files.notExists(Path.of(check.getPath())) || !Files.isDirectory(Path.of(check.getPath())))) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
     }
 
     public static void main(String[] args) throws IOException {
         Zip s = new Zip();
-        ArgsName check = ArgsName.of(args);
-        s.validation(args, check.getPath());
-        Set<File> paths = new Search().search(Paths.get(check.getPath()), p -> !p.toFile().getName().endsWith(check.exclude()))
-                .stream().map(Path::toFile).collect(Collectors.toSet());
-        packFiles(paths, Paths.get(check.toDirection()).toFile());
+        ArgsName params = ArgsName.of(args);
+        s.validation(params);
+        Search search = new Search();
+        Predicate<Path> predicate = p -> !p.toFile().getName().endsWith(params.exclude());
+        Set<File> paths = search.search(Paths.get(params.getPath()), predicate).stream()
+                .map(Path::toFile).collect(Collectors.toSet());
+        packFiles(paths, Paths.get(params.toDirection()).toFile());
     }
 }
