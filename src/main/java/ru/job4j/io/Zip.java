@@ -15,7 +15,7 @@ public class Zip {
     public static void packFiles(Set<File> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (File source : sources) {
-                zip.putNextEntry(new ZipEntry(source.getPath().replace(".\\", "")));
+                zip.putNextEntry(new ZipEntry(source.getPath()));
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
                     zip.write(out.readAllBytes());
                 }
