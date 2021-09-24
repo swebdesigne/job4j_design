@@ -38,7 +38,7 @@ public class ConsoleChat {
      * @throws IOException
      */
     public void run() throws IOException {
-        out.println("Чтобы просмотреть допустимые команды необходимо написать commands");
+        out.println("Чтобы просмотреть допустимые команды необходимо написать `инструкция`");
         InputStreamReader inputStreamReader = new InputStreamReader(System.in);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String output = bufferedReader.readLine();
