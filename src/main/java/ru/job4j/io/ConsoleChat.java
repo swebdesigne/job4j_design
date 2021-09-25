@@ -37,15 +37,18 @@ public class ConsoleChat {
      * и записывает историю в файл log.txt
      * @throws IOException
      */
-    public void run() throws IOException {
+    public void run() {
         out.println("Чтобы просмотреть допустимые команды необходимо написать `инструкция`");
-        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String output = bufferedReader.readLine();
-        if (output.equals(STOP) || output.equals(OUT) || output.equals(MAN) || output.equals(CONTINUE)) {
-            console = output;
+        try (InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+            String output = bufferedReader.readLine();
+            if (output.equals(STOP) || output.equals(OUT) || output.equals(MAN) || output.equals(CONTINUE)) {
+                console = output;
+            }
+            bot(console).execute(this, output);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        bot(console).execute(this, output);
     }
 
     /**
@@ -72,7 +75,7 @@ public class ConsoleChat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return answers.get((int) (Math.random() * 9));
+        return answers.get((int) (Math.random() * answers.size() - 1));
     }
 
     /**
@@ -92,16 +95,24 @@ public class ConsoleChat {
      * @param log - файл для записи логов
      * @param botAnswers - файл с ответами бота
      */
-    private static void validate(String log, String botAnswers) {
-        if (!Files.exists(Paths.get(log)) || !Files.exists(Paths.get(botAnswers))) {
-            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+    private static void validate(String[] args, String log, String botAnswers) throws IOException {
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Bot folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+        }
+        if (!Files.exists(Paths.get(log))) {
+            Files.createFile(Paths.get(log));
+        }
+        if (!Files.exists(Paths.get(botAnswers))) {
+            throw new IllegalArgumentException("BotAnswers file not exists.");
         }
     }
 
     public static void main(String[] args) throws IOException {
         ArgsName params = ArgsName.of(args);
-        validate(params.get("l"), params.get("a"));
-        ConsoleChat cc = new ConsoleChat(params.get("l"), params.get("a"));
+        String log =  params.get("l");
+        String botAnswers = params.get("a");
+        validate(args, log, botAnswers);
+        ConsoleChat cc = new ConsoleChat(log, botAnswers);
         out.println("Привет хозяин!!!");
         cc.run();
     }
