@@ -12,17 +12,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
-    public static void packFiles(Set<File> sources, File target, File sourceFile) {
-        Path targetPath = sourceFile.toPath();
-        boolean needRelative = targetPath.isAbsolute();
+    public static void packFiles(Set<File> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (File source : sources) {
-                if (needRelative) {
-                    Path sourceRelative = targetPath.relativize(source.toPath());
-                    zip.putNextEntry(new ZipEntry(sourceRelative.toFile().getPath()));
-                } else {
-                    zip.putNextEntry(new ZipEntry(source.getPath()));
-                }
+                zip.putNextEntry(new ZipEntry(source.getPath()));
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
                     zip.write(out.readAllBytes());
                 }
@@ -58,6 +51,6 @@ public class Zip {
         Predicate<Path> predicate = p -> !p.toFile().getName().endsWith(params.exclude());
         Set<File> paths = search.search(Paths.get(params.getPath()), predicate).stream()
                 .map(Path::toFile).collect(Collectors.toSet());
-        packFiles(paths, Paths.get(params.toDirection()).toFile(), new File(params.getPath()));
+        packFiles(paths, Paths.get(params.toDirection()).toFile());
     }
 }
