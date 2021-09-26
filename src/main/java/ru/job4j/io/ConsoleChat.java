@@ -1,4 +1,6 @@
 package ru.job4j.io;
+import ru.job4j.io.smartbot.*;
+
 import java.io.*;
 import java.io.BufferedReader;
 import java.nio.charset.StandardCharsets;
@@ -99,8 +101,13 @@ public class ConsoleChat {
         if (args.length != 2) {
             throw new IllegalArgumentException("Bot folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
-        if (!Files.exists(Paths.get(log))) {
-            Files.createFile(Paths.get(log));
+        String paramForLog = args[0].split("=")[0];
+        String paramForBotAnswer = args[1].split("=")[0];
+        if (!paramForLog.equals("-l")) {
+            throw new IllegalArgumentException("Attention! The parameter of the file of log have to be `-l`. Please to point such argument into parameters!");
+        }
+        if (!paramForBotAnswer.equals("-a")) {
+            throw new IllegalArgumentException("Attention! The parameter of the file of botAnswers have to be `-a`. Please to point such argument into parameters!");
         }
         if (!Files.exists(Paths.get(botAnswers))) {
             throw new IllegalArgumentException("BotAnswers file not exists.");
@@ -109,8 +116,8 @@ public class ConsoleChat {
 
     public static void main(String[] args) throws IOException {
         ArgsName params = ArgsName.of(args);
-        String log =  params.get("l");
-        String botAnswers = params.get("a");
+        String log =  params.get("-l");
+        String botAnswers = params.get("-a");
         validate(args, log, botAnswers);
         ConsoleChat cc = new ConsoleChat(log, botAnswers);
         out.println("Привет хозяин!!!");

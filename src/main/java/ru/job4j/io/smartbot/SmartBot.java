@@ -1,4 +1,7 @@
-package ru.job4j.io;
+package ru.job4j.io.smartbot;
+
+import ru.job4j.io.ConsoleChat;
+import ru.job4j.io.smartbot.Bot;
 
 import java.io.IOException;
 

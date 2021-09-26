@@ -1,10 +1,12 @@
-package ru.job4j.io;
+package ru.job4j.io.smartbot;
+
+import ru.job4j.io.ConsoleChat;
 
 import java.io.IOException;
 import java.util.List;
 import static java.lang.System.out;
 
-public class Continue implements Bot {
+public class Default implements Bot {
     @Override
     public void doIt(ConsoleChat chat, String output) throws IOException {
         out.println(chat.readPhrases());

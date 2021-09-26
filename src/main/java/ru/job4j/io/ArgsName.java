@@ -12,7 +12,7 @@ public class ArgsName {
     }
 
     public String getPath() {
-        return values.get("d");
+        return values.get("-d");
     }
 
     public int size() {
@@ -20,11 +20,11 @@ public class ArgsName {
     }
 
     public String exclude() {
-        return values.get("e");
+        return values.get("-e");
     }
 
     public String toDirection() {
-        return values.get("o");
+        return values.get("-o");
     }
 
     private void parse(String[] args) {
@@ -36,7 +36,7 @@ public class ArgsName {
                 throw new IllegalArgumentException("The string cannot contains no one of the symbol before and after the sign equals");
             }
             String[] tmp = value.split("=");
-            values.put(tmp[0].substring(1), tmp[1]);
+            values.put(tmp[0], tmp[1]);
         }
     }
 
