@@ -116,8 +116,8 @@ public class ConsoleChat {
 
     public static void main(String[] args) throws IOException {
         ArgsName params = ArgsName.of(args);
-        String log =  params.get("-l");
-        String botAnswers = params.get("-a");
+        String log =  params.get("l");
+        String botAnswers = params.get("a");
         validate(args, log, botAnswers);
         ConsoleChat cc = new ConsoleChat(log, botAnswers);
         out.println("Привет хозяин!!!");
