@@ -1,5 +1,5 @@
 package ru.job4j.io.csvstrategy;
 
 public interface CSVWrite {
-    void output(StringBuilder reader, String path);
+    void output(StringBuilder result, String path);
 }

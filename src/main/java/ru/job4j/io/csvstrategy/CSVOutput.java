@@ -7,7 +7,7 @@ public class CSVOutput {
         this.output = output;
     }
 
-    public void output(StringBuilder reader, String path) {
-        output.output(reader, path);
+    public void output(StringBuilder result, String path) {
+        output.output(result, path);
     }
 }
