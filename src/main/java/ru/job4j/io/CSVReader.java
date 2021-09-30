@@ -54,7 +54,7 @@ public class CSVReader {
                 for (int i = 0; i < header.length; i++) {
                     if (columns.contains(header[i])) {
                         keys.add(i);
-                        headers.append(header[i] + delimiter);
+                        headers.append(header[i]).append(delimiter);
                     }
                 }
                 parseCSVLine(scanner, keys, headers.substring(0, headers.length() - 1));
