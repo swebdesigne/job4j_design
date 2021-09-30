@@ -33,6 +33,14 @@ public class CSVReader {
         this.columns = Arrays.asList(filter.split(","));
     }
 
+    public StringBuilder getResult() {
+        return result;
+    }
+
+    public String getOut() {
+        return out;
+    }
+
     /**
      * Метод формирует сторку для вывода
      * Цикл for проходит по строке с заогловками и берет их ключи (порядок)
@@ -57,7 +65,7 @@ public class CSVReader {
      */
     public void display() {
         Map.of("stdout", new CSVOutput(new OutputToConsole()))
-                .getOrDefault(out, new CSVOutput(new OutputToFile())).output(result, out);
+                .getOrDefault(out, new CSVOutput(new OutputToFile())).output(this);
     }
 
     /**
@@ -68,7 +76,7 @@ public class CSVReader {
      *             мы нашли столбец и можем записать занчение столбца в строку
      */
     private void parseCSVLine(Scanner scanner, String delimiter, List<Integer> keys) {
-        result.append(filter.replace(",", ";"));
+        result.append(filter.replace(",", delimiter));
         while (scanner.hasNext()) {
             int i = 0;
             StringBuilder value = new StringBuilder();

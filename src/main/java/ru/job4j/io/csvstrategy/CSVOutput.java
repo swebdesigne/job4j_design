@@ -1,5 +1,7 @@
 package ru.job4j.io.csvstrategy;
 
+import ru.job4j.io.CSVReader;
+
 public class CSVOutput {
     CSVWrite output;
 
@@ -7,7 +9,7 @@ public class CSVOutput {
         this.output = output;
     }
 
-    public void output(StringBuilder result, String path) {
-        output.output(result, path);
+    public void output(CSVReader result) {
+        output.output(result);
     }
 }
