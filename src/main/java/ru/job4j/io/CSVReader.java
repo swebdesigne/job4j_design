@@ -55,7 +55,7 @@ public class CSVReader {
                         keys.add(i);
                     }
                 }
-                parseCSVLine(scanner, delimiter, keys);
+                parseCSVLine(scanner, keys);
             }
          } catch (IOException e) {
             e.printStackTrace();
@@ -73,11 +73,10 @@ public class CSVReader {
     /**
      *
      * @param scanner - сканнер
-     * @param delimiter - разделитель строки
      * @param keys - список ключей где хранятся порядковые номера. Нужно для проверки i в цикле while. Если i находится в keys, значит
      *             мы нашли столбец и можем записать занчение столбца в строку
      */
-    private void parseCSVLine(Scanner scanner, String delimiter, List<Integer> keys) {
+    private void parseCSVLine(Scanner scanner, List<Integer> keys) {
         result.append(filter.replace(",", delimiter));
         while (scanner.hasNext()) {
             int i = 0;
