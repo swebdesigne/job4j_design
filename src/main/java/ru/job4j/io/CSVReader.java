@@ -75,7 +75,8 @@ public class CSVReader {
     /**
      * @param scanner - сканнер
      * @param keys - список ключей где хранятся порядковые номера. Нужно для проверки i в цикле while. Если i находится в keys, значит
-     * @param headers
+     *             мы нашли столбец и можем записать занчение столбца в строку
+     * @param headers - заголовки
      */
     private void parseCSVLine(Scanner scanner, List<Integer> keys, String headers) {
         result.append(headers);
