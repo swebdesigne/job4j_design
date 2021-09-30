@@ -50,12 +50,14 @@ public class CSVReader {
             if (scanner.hasNextLine()) {
                 String[] header = scanner.nextLine().split(delimiter);
                 List<Integer> keys = new ArrayList<>();
+                StringBuilder headers = new StringBuilder();
                 for (int i = 0; i < header.length; i++) {
                     if (columns.contains(header[i])) {
                         keys.add(i);
+                        headers.append(header[i] + delimiter);
                     }
                 }
-                parseCSVLine(scanner, keys);
+                parseCSVLine(scanner, keys, headers.substring(0, headers.length() - 1));
             }
          } catch (IOException e) {
             e.printStackTrace();
@@ -71,13 +73,12 @@ public class CSVReader {
     }
 
     /**
-     *
      * @param scanner - сканнер
      * @param keys - список ключей где хранятся порядковые номера. Нужно для проверки i в цикле while. Если i находится в keys, значит
-     *             мы нашли столбец и можем записать занчение столбца в строку
+     * @param headers
      */
-    private void parseCSVLine(Scanner scanner, List<Integer> keys) {
-        result.append(filter.replace(",", delimiter));
+    private void parseCSVLine(Scanner scanner, List<Integer> keys, String headers) {
+        result.append(headers);
         while (scanner.hasNext()) {
             int i = 0;
             StringBuilder value = new StringBuilder();
