@@ -2,8 +2,6 @@ package ru.job4j.io.csvstrategy;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class OutputToFile implements CSVWrite {
     @Override
