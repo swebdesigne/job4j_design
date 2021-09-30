@@ -32,7 +32,7 @@ public class ArgsName {
             throw new IllegalArgumentException();
         }
         for (String value : args) {
-            if (!displayError("[a-zA-Z0-9*.]=[a-zA-Z0-9*.]", value)) {
+            if (!displayError("[[\\S]{0,}]=[[\\S]{0,}]", value)) {
                 throw new IllegalArgumentException("The string cannot contains no one of the symbol before and after the sign equals");
             }
             String[] tmp = value.split("=");
