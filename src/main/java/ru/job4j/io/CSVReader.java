@@ -47,14 +47,16 @@ public class CSVReader {
      */
     public void handle() {
         try (Scanner scanner = new Scanner(path)) {
-            String[] header = scanner.nextLine().split(delimiter);
-            List<Integer> keys = new ArrayList<>();
-            for (int i = 0; i < header.length; i++) {
-                if (columns.contains(header[i])) {
-                    keys.add(i);
+            if (scanner.hasNextLine()) {
+                String[] header = scanner.nextLine().split(delimiter);
+                List<Integer> keys = new ArrayList<>();
+                for (int i = 0; i < header.length; i++) {
+                    if (columns.contains(header[i])) {
+                        keys.add(i);
+                    }
                 }
+                parseCSVLine(scanner, delimiter, keys);
             }
-            parseCSVLine(scanner, delimiter, keys);
          } catch (IOException e) {
             e.printStackTrace();
         }
