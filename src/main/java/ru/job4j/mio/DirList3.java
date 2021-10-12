@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class DirList3 {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         File path = new File(".");
         String[] list;
         if (args.length == 0) {
