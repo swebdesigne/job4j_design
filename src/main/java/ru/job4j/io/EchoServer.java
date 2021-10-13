@@ -19,8 +19,7 @@ public class EchoServer {
 
     private static void displayMsg(OutputStream out, String msg) throws IOException {
         out.write("Hello, dear friend.\n".getBytes());
-        String result = "\n\"" + msg + "\"";
-        out.write(result.getBytes());
+        out.write(String.format("%s%s%s", "'", msg, "'").getBytes());
     }
 
     @SuppressWarnings("checkstyle:InnerAssignment")
