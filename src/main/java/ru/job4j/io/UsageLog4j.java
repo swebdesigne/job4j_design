@@ -18,10 +18,5 @@ public class UsageLog4j {
         LOG.debug("Data type - char : {}, boolean : {}, byte : {}, short : {},"
                         + " int : {}, long : {}, float : {}, double : {}",
                 tChar, tBoolean, tByte, tShort, tInt, tLong, tFloat, tDouble);
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
     }
 }
