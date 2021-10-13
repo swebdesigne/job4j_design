@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
@@ -38,10 +37,10 @@ public class EchoServer {
                     while (!str.isEmpty()) {
                         if (str.contains("msg=")) {
                             String result = echoServer.parseString(str);
-                            if (result.equals(BYE)) {
+                            if (BYE.equals(result)) {
                                 out.write("Bye Bye!!!".getBytes());
                                 server.close();
-                            } else if (result.equals(HELLO)) {
+                            } else if (HELLO.equals(result)) {
                                 displayMsg(out, result);
                             } else {
                                 displayMsg(out, "What");
