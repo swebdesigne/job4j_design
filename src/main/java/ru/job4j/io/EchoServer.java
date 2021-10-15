@@ -20,11 +20,6 @@ public class EchoServer {
         return subArr[0];
     }
 
-    private static void displayMsg(OutputStream out, String msg) throws Exception {
-        out.write("Hello, dear friend.\n".getBytes());
-        out.write(String.format("%s%s%s", "'", msg, "'").getBytes());
-    }
-
     public static void main(String[] args) {
         EchoServer echoServer = new EchoServer();
         try (ServerSocket server = new ServerSocket(9000)) {
@@ -41,9 +36,11 @@ public class EchoServer {
                                 out.write("Bye Bye!!!".getBytes());
                                 server.close();
                             } else if (HELLO.equals(result)) {
-                                displayMsg(out, result);
+                                out.write("Hello, dear friend.\n".getBytes());
+                                out.write(String.format("%s%s%s", "'", result, "'").getBytes());
                             } else {
-                                displayMsg(out, "What");
+                                out.write("Hello, dear friend.\n".getBytes());
+                                out.write("'What'".getBytes());
                             }
                         }
                         str = in.readLine();
