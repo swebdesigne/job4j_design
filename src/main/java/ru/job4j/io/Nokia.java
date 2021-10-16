@@ -3,16 +3,27 @@ package ru.job4j.io;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 
+@XmlRootElement(name = "nokia")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Nokia {
-    private final String name;
-    private final SmartPhone hardware;
-    private final int year;
+    private String name;
+    private SmartPhone hardware;
+    private int year;
     private float price;
+    @XmlElementWrapper(name = "colors")
+    @XmlElement(name = "color")
     private String[] colors;
+
+    public Nokia() {
+    }
 
     public Nokia(String name, int year, float price, SmartPhone hardware, String... color) {
         this.name = name;
@@ -33,8 +44,8 @@ public class Nokia {
                 + '}';
     }
 
-    public static void main(String[] args) throws IOException {
-        Nokia phone = new Nokia(
+    public static void main(String[] args) throws IOException, JAXBException {
+        final Nokia phone = new Nokia(
                 "Nokia 2100", 2021, 40.21F,
                 new SmartPhone(3.400F, 128, true, Map.of("type", "IPS", "resolution", "2400x1080", "Hz", "120")),
                 "red", "black"
@@ -45,5 +56,17 @@ public class Nokia {
 
         final Nokia dataFromJson = gson.fromJson(data, Nokia.class);
         System.out.println(dataFromJson);
+
+        JAXBContext context = JAXBContext.newInstance(Nokia.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+        try (StringWriter writer = new StringWriter()) {
+            marshaller.marshal(phone, writer);
+            String result = writer.getBuffer().toString();
+            System.out.println(result);
+        } catch (Exception e) {
+            System.out.println("Cannot serialize");
+        }
     }
 }

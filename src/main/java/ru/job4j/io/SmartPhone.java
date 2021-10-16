@@ -1,12 +1,21 @@
 package ru.job4j.io;
 
+import javax.xml.bind.annotation.*;
 import java.util.Map;
 
+@XmlRootElement(name = "SmartPhone")
 public class SmartPhone {
-    private final float battery;
-    private final int storage;
-    private final boolean fleshCard;
-    private final Map<String, String> screen;
+    @XmlAttribute
+    private float battery;
+    @XmlAttribute
+    private int storage;
+    @XmlAttribute
+    private boolean fleshCard;
+    @XmlElement
+    private Map<String, String> screen;
+
+    public SmartPhone() {
+    }
 
     public SmartPhone(float battery, int storage, boolean fleshCard, Map<String, String> screen) {
         this.battery = battery;
@@ -40,5 +49,4 @@ public class SmartPhone {
                 + ", screen=" + screen
                 + '}';
     }
-
 }
