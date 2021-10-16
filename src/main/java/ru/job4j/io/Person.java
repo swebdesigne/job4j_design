@@ -1,17 +1,29 @@
 package ru.job4j.io;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+@XmlRootElement(name = "person")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
-    private final boolean sex;
-    private final int age;
-    private final Contact contact;
-    private final String[] statuses;
+    private boolean sex;
+    private int age;
+    private Contact contact;
+    private String[] statuses;
 
-    public Person(boolean sex, int age, Contact contact, String... statuses) {
+    public Person() {
+    }
+
+    public Person(boolean sex, int age, Contact contact, String worker, String... statuses) {
         this.sex = sex;
         this.age = age;
         this.contact = contact;
@@ -28,24 +40,28 @@ public class Person {
                 + '}';
     }
 
-    public static void main(String[] args) {
-        Person person = new Person(true, 33,
-                new Contact(123456, "+7 (111) 111-11-11"), "Worker", "Married");
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(person));
-
-        final String personJson =
-                "{"
-                        + "\"sex\":false,"
-                        + "\"age\":35,"
-                        + "\"contact\":"
-                        + "{"
-                        + "\"phone\":\"+7(924)111-111-11-11\""
-                        + "},"
-                        + "\"statuses\":"
-                        + "[\"Student\",\"Free\"]"
-                        + "}";
-        final Person personMod = gson.fromJson(personJson, Person.class);
-        System.out.println(personMod);
+    private int getAge() {
+        return age;
     }
+
+    private boolean isSex() {
+        return sex;
+    }
+
+    public static void main(String[] args) throws JAXBException {
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
+        List<String> list = new ArrayList<>();
+        list.add("Student");
+        list.add("Free");
+        JSONArray jsonStatuses = new JSONArray(list);
+        final Person person = new Person(false, 30, new Contact("11-111"), "Worker", "Married");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sex", person.isSex());
+        jsonObject.put("age", person.getAge());
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("statuses", jsonStatuses);
+        System.out.println(jsonObject.toString());
+        System.out.println(new JSONObject(person).toString());
+    }
+
 }
