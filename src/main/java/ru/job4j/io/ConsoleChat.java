@@ -94,6 +94,7 @@ public class ConsoleChat {
 
     /**
      * Метод проверят что в параметрах указаны пути до файлов
+     * -l=src\main\java\ru\job4j\data\bot\log.txt -a=src\main\java\ru\job4j\data\bot\botAnswers.txt
      * @param log - файл для записи логов
      * @param botAnswers - файл с ответами бота
      */
