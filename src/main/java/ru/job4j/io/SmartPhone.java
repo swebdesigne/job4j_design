@@ -1,10 +1,12 @@
 package ru.job4j.io;
 
+import org.json.JSONPropertyIgnore;
+
 import javax.xml.bind.annotation.*;
 import java.util.Map;
 
 @XmlRootElement(name = "SmartPhone")
-public class SmartPhone {
+public class SmartPhone<T> {
     @XmlAttribute
     private float battery;
     @XmlAttribute
@@ -13,6 +15,7 @@ public class SmartPhone {
     private boolean fleshCard;
     @XmlElement
     private Map<String, String> screen;
+    private T phone;
 
     public SmartPhone() {
     }
@@ -22,6 +25,15 @@ public class SmartPhone {
         this.storage = storage;
         this.fleshCard = fleshCard;
         this.screen = screen;
+    }
+
+    @JSONPropertyIgnore
+    public T getPhone() {
+        return phone;
+    }
+
+    public void setPhone(T phone) {
+        this.phone = phone;
     }
 
     public float getBattery() {

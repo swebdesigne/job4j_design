@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONObject;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -50,6 +51,9 @@ public class Nokia {
                 new SmartPhone(3.400F, 128, true, Map.of("type", "IPS", "resolution", "2400x1080", "Hz", "120")),
                 "red", "black"
         );
+
+        System.out.println(new JSONObject(phone));
+
         final Gson gson = new GsonBuilder().create();
         String data = gson.toJson(phone);
         System.out.println(data);
