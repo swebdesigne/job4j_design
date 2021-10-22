@@ -9,8 +9,9 @@ import static java.lang.System.out;
 public class Default implements Bot {
     @Override
     public void doIt(ConsoleChat chat, String output) throws IOException {
-        out.println(chat.readPhrases());
-        chat.saveLog(List.of(output, "\t" + chat.readPhrases()));
+        String answer = chat.readPhrases();
+        out.println(answer);
+        chat.saveLog(List.of(output, "\t" + answer));
         chat.run();
     }
 }
