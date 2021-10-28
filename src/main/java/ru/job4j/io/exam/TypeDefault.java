@@ -11,7 +11,6 @@ public class TypeDefault implements ISearch {
 
     @Override
     public boolean search(Path path) {
-        System.out.println("fas");
         return path.toFile().getName().equals(this.file);
     }
 }

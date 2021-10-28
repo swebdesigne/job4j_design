@@ -1,7 +1,6 @@
 package ru.job4j.io.exam;
 
 import java.nio.file.Path;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex implements ISearch {
@@ -11,10 +10,13 @@ public class Regex implements ISearch {
         this.pattern = pattern;
     }
 
+    /**
+     * метод ищет файл по регулярному выражению, например - .*\\bot\\.*txt
+     * @param path - путь к файлу
+     * @return - возвращает true или false
+    */
     @Override
     public boolean search(Path path) {
-        Pattern pattern1 = Pattern.compile(pattern);
-        Matcher matcher = pattern1.matcher(path.toFile().getName());
-        return matcher.find();
+        return Pattern.compile(pattern).matcher(path.toString()).matches();
     }
 }
