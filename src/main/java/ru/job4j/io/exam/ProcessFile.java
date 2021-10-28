@@ -40,8 +40,8 @@ public class ProcessFile {
     */
     private Searcher searcher() {
         return Map.of(
-                REGEX,  new Searcher(new Regex(this.file)),
-                MASK, new Searcher(new Mask(this.file))
+                MASK, new Searcher(new Mask(this.file)),
+                REGEX,  new Searcher(new Regex(this.file))
         ).getOrDefault(this.pattern, new Searcher(new TypeDefault(this.file)));
     }
 
