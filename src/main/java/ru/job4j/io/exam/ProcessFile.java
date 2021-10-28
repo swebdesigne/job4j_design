@@ -53,7 +53,7 @@ public class ProcessFile {
      * @return - возвращает найденные файлы
      * @throws IOException
     */
-    public List<Path> search() throws IOException {
+    private List<Path> search() throws IOException {
         Search searcher = new Search(searcher(this.file, this.pattern));
         Files.walkFileTree(Path.of(this.dir), searcher);
         return searcher.getPaths();
