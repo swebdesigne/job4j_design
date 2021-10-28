@@ -16,11 +16,11 @@ import java.util.regex.Pattern;
  *  @version 1.0
 */
 public class ProcessFile {
-    private  String log;
-    private  String dir;
-    private  String file;
-    private  String[] args;
-    private  String pattern;
+    private final String log;
+    private final String dir;
+    private final String file;
+    private final String[] args;
+    private final String pattern;
     private static final String MASK = "mask";
     private static final String REGEX = "regex";
     private final Map<String, String> values = new HashMap<>();
