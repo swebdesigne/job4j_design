@@ -98,6 +98,7 @@ public class ConsoleChat {
      * @param log - файл для записи логов
      * @param botAnswers - файл с ответами бота
      */
+
     private static void validate(String[] args, String log, String botAnswers) throws IOException {
         if (args.length != 2) {
             throw new IllegalArgumentException("Bot folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
