@@ -36,15 +36,13 @@ public class ProcessFile {
 
     /**
      * метод выбирает тип поиска
-     * @param file - искомый файл
-     * @param type - способ поиска
      * @return
     */
-    private Searcher searcher(String file, String type) {
+    private Searcher searcher() {
         return Map.of(
-                REGEX,  new Searcher(new Regex(file)),
-                MASK, new Searcher(new Mask(file))
-        ).getOrDefault(type, new Searcher(new TypeDefault(file)));
+                REGEX,  new Searcher(new Regex(this.file)),
+                MASK, new Searcher(new Mask(this.file))
+        ).getOrDefault(this.pattern, new Searcher(new TypeDefault(this.file)));
     }
 
     /**
@@ -53,7 +51,7 @@ public class ProcessFile {
      * @throws IOException
     */
     private List<Path> search() throws IOException {
-        Search searcher = new Search(searcher(this.file, this.pattern));
+        Search searcher = new Search(searcher());
         Files.walkFileTree(Path.of(this.dir), searcher);
         return searcher.getPaths();
     }
