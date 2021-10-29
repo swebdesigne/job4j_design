@@ -1,2 +1,1 @@
-.\src\main\java\ru\job4j\data\bot\botAnswers.txt
-.\src\main\java\ru\job4j\data\bot\log.txt
+.\.idea\checkstyleidea-libs\readme.txt

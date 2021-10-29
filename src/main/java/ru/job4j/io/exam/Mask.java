@@ -1,12 +1,14 @@
 package ru.job4j.io.exam;
 
 import java.nio.file.Path;
+import java.util.regex.Pattern;
 
 public class Mask implements ISearch {
     String pattern;
 
-    public Mask(String file) {
-        this.pattern = file;
+    public Mask(String pattern) {
+        this.pattern = pattern.replace("?", ".?")
+        .replace("*", ".*?");
     }
 
     /**
@@ -16,6 +18,6 @@ public class Mask implements ISearch {
     */
     @Override
     public boolean search(Path path) {
-        return path.toFile().getName().endsWith(pattern);
+        return Pattern.compile(pattern).matcher(path.toString()).find();
     }
 }

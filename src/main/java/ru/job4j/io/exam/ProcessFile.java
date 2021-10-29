@@ -32,6 +32,7 @@ public class ProcessFile {
         this.dir = this.get("d");
         this.file = this.get("n");
         this.pattern = this.get("t");
+        validation();
     }
 
     /**
@@ -89,9 +90,6 @@ public class ProcessFile {
      * заполняет мапу
     */
     private void getArgs(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException();
-        }
         for (String value : args) {
             if (!displayError("[[\\S]{0,}]=[[\\S]{0,}]", value)) {
                 throw new IllegalArgumentException("The string cannot contains no one of the symbol before and after the sign equals");
@@ -107,7 +105,6 @@ public class ProcessFile {
 
     public static void main(String[] args) throws IOException {
         ProcessFile processFile = new ProcessFile(args);
-        processFile.validation();
         processFile.writeToFile(processFile.search());
     }
 }

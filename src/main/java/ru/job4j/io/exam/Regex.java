@@ -17,6 +17,6 @@ public class Regex implements ISearch {
     */
     @Override
     public boolean search(Path path) {
-        return Pattern.compile(pattern).matcher(path.toString()).matches();
+        return Pattern.compile(pattern).matcher(path.toString()).find();
     }
 }
