@@ -34,7 +34,7 @@ public class MakeDirectories {
         if (f.isFile()) {
             System.out.println("It is a file");
         } else if (f.isDirectory()) {
-            System.out.println("It si directory");
+            System.out.println("It is a directory");
         }
     }
 
