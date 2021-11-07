@@ -25,6 +25,7 @@ public class StoringAndRecoveringData {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         StoringAndRecoveringData file = new StoringAndRecoveringData();
         file.writer();
