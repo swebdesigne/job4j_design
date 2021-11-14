@@ -1,1 +1,0 @@
-.\.idea\checkstyleidea-libs\readme.txt
