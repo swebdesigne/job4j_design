@@ -1,8 +1,19 @@
       # используем язык java. Travis CI поддерживает другие языки тоже.
       language: java
-      script: mvn run
       jdk:
         - openjdk11
+
+      cache:
+        directories:
+          - "$HOME/.cache"
+
+      before_install:
+        - cp .travis.settings.xml $HOME/.m2/settings.xml
+
+      deploy:
+        provider: script
+        script: "mvn -B -V deploy"
+        skip_cleanup: true
 
       # используем режим обычного пользователя для сборки проекта.
       sudo: false
