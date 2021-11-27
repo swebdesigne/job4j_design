@@ -7,8 +7,6 @@
       # используем режим обычного пользователя для сборки проекта.
       sudo: false
 
-      install:
-        - "mvn -N io.takari:maven:wrapper -Dmaven=${MAVEN_VERSION}"
       script: "./mvnw --show-version --errors --batch-mode -Prun-its clean verify"
 
       cache:
