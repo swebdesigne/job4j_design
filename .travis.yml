@@ -4,14 +4,6 @@
         - openjdk11
       os: osx
 
-      before_install:
-        - brew install git-lfs
-
-      before_script:
-        - git lfs pull
-
-      git:
-        lfs_skip_smudge: true
       # используем режим обычного пользователя для сборки проекта.
       sudo: false
 
