@@ -2,16 +2,16 @@
       language: java
       jdk:
         - openjdk11
+      os: osx
 
-      cache:
-        directories:
-          - "$HOME/.cache"
+      before_install:
+        - brew install git-lfs
 
-      deploy:
-        provider: script
-        script: "mvn -B -V deploy"
-        skip_cleanup: true
+      before_script:
+        - git lfs pull
 
+      git:
+        lfs_skip_smudge: true
       # используем режим обычного пользователя для сборки проекта.
       sudo: false
 
