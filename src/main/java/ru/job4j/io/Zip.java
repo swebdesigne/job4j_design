@@ -44,6 +44,14 @@ public class Zip {
         }
     }
 
+    /**
+     * java -jar pack.jar -d=c:\project\job4j\ -e=class -o=project.zip
+     * the certain arguments:
+     * -d - directory - которую мы хотим архивировать
+     * -e - exclude - исключить файлы *.xml
+     * -o - output - во что мы архивируем.
+     * @param check - the arguments come in from settings
+     */
     private void validation(ArgsName check) {
         if (check.size() != 3 || (Files.notExists(Path.of(check.getPath())) || !Files.isDirectory(Path.of(check.getPath())))) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
