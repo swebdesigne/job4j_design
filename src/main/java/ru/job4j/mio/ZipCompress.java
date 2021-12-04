@@ -12,13 +12,13 @@ public class ZipCompress {
 
     /**
      * метод архивирует файлы
-     * в аргументы необходимо передать наименование файла в которое будет зиповаться
+     * в аргументы необходимо передать наименование файла который будет зиповаться
      */
     private void compress() {
         try (FileOutputStream f = new FileOutputStream("compress.zip");
              CheckedOutputStream csum = new CheckedOutputStream(f, new Adler32());
              ZipOutputStream zos = new ZipOutputStream(csum);
-             BufferedOutputStream out = new BufferedOutputStream(zos);
+             BufferedOutputStream out = new BufferedOutputStream(zos)
         ) {
             zos.setComment("A test of java Zipping");
             for (String arg : this.args) {
@@ -71,7 +71,5 @@ public class ZipCompress {
     public static void main(String[] args) {
         ZipCompress zip = new ZipCompress();
         zip.args = args;
-//        zip.compress();
-        zip.uncompress();
     }
 }
