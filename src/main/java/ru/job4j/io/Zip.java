@@ -45,7 +45,7 @@ public class Zip {
     }
 
     /**
-     * java -jar pack.jar -d=c:\project\job4j\ -e=class -o=project.zip
+     * java -jar target/zip.jar -d=. -e=class -o=new_project.zip
      * the certain arguments:
      * -d - directory - которую мы хотим архивировать
      * -e - exclude - исключить файлы *.xml
