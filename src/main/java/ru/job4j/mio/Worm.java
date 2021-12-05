@@ -39,8 +39,6 @@ public class Worm implements Serializable {
     }
 
     public static void main(String[] args) {
-        Worm w = new Worm(6, 'a');
-        System.out.println("w = " + w);
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("test20.txt"));
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("test20.txt"));
              ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -49,17 +47,16 @@ public class Worm implements Serializable {
                      bout.toByteArray()
              ))
         ) {
+            Worm w = new Worm(6, 'a');
+            System.out.println("w = " + w);
             out.writeObject("Worm storage\n");
             out.writeObject(w);
             String s = (String) in.readObject();
             Worm w2 = (Worm) in.readObject();
-            System.out.println(s + "w2" + w2);
+            System.out.println(s + "w2 = " + w2);
             out2.writeObject("Worm storage\n");
             out2.writeObject(w);
             out2.flush();
-            String s2 = (String) in2.readObject();
-            Worm w3 = (Worm) in2.readObject();
-            System.out.println(s2 + "w3 = " + w3);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
