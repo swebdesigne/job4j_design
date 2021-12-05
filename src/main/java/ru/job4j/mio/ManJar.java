@@ -3,8 +3,8 @@ package ru.job4j.mio;
 public class ManJar {
     private void man() {
         System.out.printf(
-                "c %s\nt %s\nx %s f %s \nm %s \nv %s \nO %s \nM %s",
-                "Создает новй или пустой массив",
+                "c %s\nt %s\nx %s \nf %s \nm %s \nv %s \nO %s \nM %s",
+                "Создает новый или пустой массив",
                 "Распечатывает содержимое массива",
                 "Извлекает все файлы",
                 "Признак задания имени файла. Если не использвоать"
