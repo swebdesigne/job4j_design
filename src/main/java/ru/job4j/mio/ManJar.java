@@ -1,6 +1,8 @@
 package ru.job4j.mio;
 
-public class ManJar {
+import java.io.Serializable;
+
+public class ManJar implements Serializable {
     private void man() {
         System.out.printf(
                 "c %s\nt %s\nx %s \nf %s \nm %s \nv %s \nO %s \nM %s",
