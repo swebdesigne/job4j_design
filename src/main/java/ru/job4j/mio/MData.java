@@ -2,8 +2,8 @@ package ru.job4j.mio;
 
 import java.io.Serializable;
 
-public class Data implements Serializable {
-    private int n;
+class Data implements Serializable {
+    private final int n;
 
     public Data(int n) {
         this.n = n;
