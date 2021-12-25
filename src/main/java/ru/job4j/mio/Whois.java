@@ -33,7 +33,5 @@ public class Whois {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
