@@ -40,23 +40,38 @@ insert into devices_people (device_id, people_id) values (2, 2);
 insert into devices_people (device_id, people_id) values (3, 3);
 
 /* ================================================================================================ */
-select avg(price) from devices where id in (select device_id from devices_people where people_id = 1);
-select min(price) from devices where id in (select device_id from devices_people where people_id = 1) group by price having min(price)
-< 90;
-select min(price) from devices where id in (select device_id from devices_people where people_id = 1) group by price having avg(price)
-> 5000;
+select avg(price) from devices
+where id in (select device_id from devices_people where people_id = 1);
 
-select p.name, d.price from devices as d, people as p where d.id in (select device_id from devices_people where people_id = p.id) order by p.name;
-select p.name, min(d.price) from devices as d, people as p where d.id in (select device_id from devices_people where people_id = p.id)
+select min(price) from devices
+where id in (select device_id from devices_people where people_id = 1)
+group by price having min(price) < 90;
+select min(price) from devices
+
+where id in (select device_id from devices_people where people_id = 1)
+group by price having avg(price) > 5000;
+
+select p.name, d.price from devices as d, people as p
+where d.id in (select device_id from devices_people where people_id = p.id)
+order by p.name;
+
+select p.name, min(d.price) from devices as d, people as p
+where d.id in (select device_id from devices_people where people_id = p.id)
 group by p.name;
 
-select p.name, max(d.price) from devices as d, people as p where d.id in (select device_id from devices_people where people_id = p.id)
+select p.name, max(d.price) from devices as d, people as p
+where d.id in (select device_id from devices_people where people_id = p.id)
 group by p.name;
-select p.name, avg(d.price) from devices as d, people as p where d.id in (select device_id from devices_people where people_id = p.id)
+
+select p.name, avg(d.price) from devices as d, people as p
+where d.id in (select device_id from devices_people where people_id = p.id)
 group by p.name having avg(price) > 50;
 
-select * from devices where id in (select device_id from devices_people where people_id = 1);
-select * from devices where id in (select device_id from devices_people where people_id =
+select * from devices
+where id in (select device_id from devices_people where people_id = 1);
+
+select * from devices
+where id in (select device_id from devices_people where people_id =
 (select id from people where name = 'Igor'));
 
 
