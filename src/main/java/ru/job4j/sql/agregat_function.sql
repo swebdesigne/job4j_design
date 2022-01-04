@@ -52,11 +52,12 @@ insert into devices_people (device_id, people_id) values (3, 3);
 select avg(d.price) from devices;
 
 -- Средняя стоимость устройства для каждого человека
-select p.name, d.name, d.price
+select p.name, avg(d.price)
 from devices_people as dp
 join people p
 on dp.people_id = p.id
-join devices as d on dp.device_id = d.id;
+join devices as d on dp.device_id = d.id
+group by p.name;
 
 -- Средняя стоимость устройства, где ср. стоимость устрайства > 5000 для каждого человека
 select p.name, avg(d.price)
