@@ -12,7 +12,7 @@ create table engine(
 
 create table transmission(
     id serial primary key,
-    name varchar(30) not null unique
+    name varchar(255) not null unique
 );
 
 create table model_car(
