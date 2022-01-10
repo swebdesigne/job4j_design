@@ -1,6 +1,8 @@
 package ru.job4j.sql.jdbc;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,14 +14,14 @@ public class TableEditor implements AutoCloseable {
     private Connection connection;
     private final Properties properties;
 
-    public TableEditor(Properties properties) {
+    public TableEditor(Properties properties) throws IOException {
         this.properties = properties;
+        properties.load(new FileReader("src/main/java/ru/job4j/sql/property/app.properties"));
         initConnection();
     }
 
     private void initConnection() {
         try {
-            properties.load(new FileReader("src/main/java/ru/job4j/sql/property/app.properties"));
             Class.forName(properties.getProperty("driver_class"));
             connection = DriverManager.getConnection(
                 properties.getProperty("url"),
@@ -39,19 +41,19 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void dropTable(String tableName) {
-        execute("drop table " + tableName);
+        execute(String.format("drop table (%s)", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        execute("alter table " + tableName + " add column " + columnName + " " + type);
+        execute(String.format("alter table %s add column %s %s", tableName, columnName, type));
     }
 
     public void dropColumn(String tableName, String columnName) {
-        execute("alter table " + tableName + " drop column " + columnName);
+        execute(String.format("alter table %s drop column %s", tableName, columnName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        execute("alter table " + tableName + " rename column " + columnName + " to " + newColumnName);
+        execute(String.format("alter table %s rename column %s to %s", tableName, columnName, newColumnName));
     }
 
     private void execute(String query) {
