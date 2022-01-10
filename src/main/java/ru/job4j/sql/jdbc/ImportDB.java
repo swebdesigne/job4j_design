@@ -23,9 +23,10 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader bfr = new BufferedReader(new FileReader(dump))) {
             bfr.lines().forEach(user -> {
-                   Scanner scanner = new Scanner(user).useDelimiter(";");
-                   while (scanner.hasNext()) {
-                       users.add(new User(scanner.next(), scanner.next()));
+                   try (Scanner scanner = new Scanner(user).useDelimiter(";")) {
+                       while (scanner.hasNext()) {
+                           users.add(new User(scanner.next(), scanner.next()));
+                       }
                    }
                 }
             );
