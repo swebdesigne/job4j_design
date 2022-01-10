@@ -26,17 +26,21 @@ public class ImportDB {
         try (BufferedReader bfr = new BufferedReader(new FileReader(dump))) {
             bfr.lines().forEach(user -> {
                     String[] dataUser = user.split(";");
-                    if (dataUser.length != 2) {
-                        throw new IllegalArgumentException("Length of array must be equals two");
-                    }
-                    if (dataUser[0].isEmpty() || dataUser[1].isEmpty()) {
-                        throw new IllegalArgumentException("The element must be not empty");
-                    }
+                    validate(dataUser);
                     users.add(new User(dataUser[0], dataUser[1]));
                 }
             );
         }
         return users;
+    }
+
+    private void validate(String[] arr) {
+        if (arr.length != 2) {
+            throw new IllegalArgumentException("Length of array must be equals two");
+        }
+        if (arr[0].isEmpty() || arr[1].isEmpty()) {
+            throw new IllegalArgumentException("The element must be not empty");
+        }
     }
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
