@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 public class ImportDB {
     private final Properties cfg;
@@ -23,10 +25,14 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader bfr = new BufferedReader(new FileReader(dump))) {
             bfr.lines().forEach(user -> {
-                   Scanner scanner = new Scanner(user).useDelimiter(";");
-                   while (scanner.hasNext()) {
-                       users.add(new User(scanner.next(), scanner.next()));
-                   }
+                    String[] dataUser = user.split(";");
+                    if (dataUser.length != 2) {
+                        throw new IllegalArgumentException("Length of array must be equals two");
+                    }
+                    if (dataUser[0].isEmpty() || dataUser[1].isEmpty()) {
+                        throw new IllegalArgumentException("The element must be not empty");
+                    }
+                    users.add(new User(dataUser[0], dataUser[1]));
                 }
             );
         }
