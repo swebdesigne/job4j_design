@@ -15,7 +15,6 @@ public class TableEditor implements AutoCloseable {
 
     public TableEditor(Properties properties) throws IOException {
         this.properties = properties;
-        properties.load(new FileReader("src/main/java/ru/job4j/sql/property/app.properties"));
         initConnection();
     }
 
@@ -40,7 +39,7 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void dropTable(String tableName) {
-        execute(String.format("drop table (%s)", tableName));
+        execute(String.format("drop table %s", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
@@ -90,17 +89,25 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
+        Properties properties = new Properties();
+        properties.load(new FileReader("src/main/java/ru/job4j/sql/property/app.properties"));
+
+        TableEditor editor = new TableEditor(properties);
+
         String tableName = "table_test";
-        TableEditor editor = new TableEditor(new Properties());
 
         editor.createTable(tableName);
         System.out.println(editor.getTableScheme(editor.connection, tableName));
+
         editor.dropTable(tableName);
         System.out.println(editor.getTableScheme(editor.connection, tableName));
+
         editor.addColumn(tableName, "surname", "varchar(255)");
         System.out.println(editor.getTableScheme(editor.connection, tableName));
+
         editor.dropColumn(tableName, "surname");
         System.out.println(editor.getTableScheme(editor.connection, tableName));
+
         editor.renameColumn(tableName, "surname", "surname_1");
         System.out.println(editor.getTableScheme(editor.connection, tableName));
     }
