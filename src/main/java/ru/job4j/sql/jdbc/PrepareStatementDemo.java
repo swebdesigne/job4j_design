@@ -44,7 +44,6 @@ public class PrepareStatementDemo {
     }
 
     public void insert(City city) {
-        boolean result = false;
         try (PreparedStatement statement = connection.prepareStatement(
                 "insert into cities(name, population) values (?, ?)"
         )) {
